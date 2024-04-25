@@ -4,3 +4,13 @@
 *:after {
   box-sizing: border-box;
 }
+
+.nav-flex {
+  display: flex;
+}
+
+.nav-flex div {
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}

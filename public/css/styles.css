@@ -111,6 +111,10 @@ img {
   grid-column: 1 / 3;
 }
 
+.upgrades a {
+  color: black;
+}
+
 .flux {
   grid-row: 2 / 3;
   display: flex;

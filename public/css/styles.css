@@ -58,7 +58,10 @@ img {
   padding: 10px;
 }
 
-.nav-flex div {
+.nav-flex ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
   font-size: large;
   color: white;
 }
@@ -209,12 +212,9 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: rgb(40, 2, 40);
-  padding: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
 }
 
-.nav-flex div {
+.nav-flex ul li{
   font-size: large;
   color: white;
   margin: 0 20px;

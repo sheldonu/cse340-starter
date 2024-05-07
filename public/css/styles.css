@@ -198,6 +198,15 @@ nav ul li a:hover {
 
 #inv-display {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+#inv-display ul li a{
+  align-items: center;
+  justify-content: center;
 }
 
 @media only screen and (min-width: 768px) {
@@ -372,6 +381,11 @@ main {
 
 .reviews ul li {
   margin-bottom: 10px;
+}
+
+#inv-display {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
 }
 
 }

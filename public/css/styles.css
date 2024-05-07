@@ -50,20 +50,28 @@ img {
   max-width: 100%;
 }
 
-.nav-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(40, 2, 40);
-  padding: 10px;
+nav {
+  background-color: #333; /* Change this to your desired background color */
 }
 
-.nav-flex ul {
+nav ul {
   list-style: none;
   display: flex;
-  justify-content: space-between;
-  font-size: large;
-  color: white;
+  justify-content: center;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 10px 10px;
+}
+
+nav ul li a {
+  color: #fff; /* Change this to your desired text color */
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: #555; /* Change this to your desired hover color */
 }
 
 .top-portion h1 {
@@ -188,6 +196,10 @@ img {
   margin-bottom: 10px;
 }
 
+#inv-display {
+  list-style: none;
+}
+
 @media only screen and (min-width: 768px) {
 body {
   background-image: linear-gradient(45deg, #000 25%, transparent 25%),
@@ -207,17 +219,17 @@ body {
   max-width: 1200px;
 }
 
-.nav-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(40, 2, 40);
+nav {
+  padding: 0;
 }
 
-.nav-flex ul li{
-  font-size: large;
-  color: white;
-  margin: 0 20px;
+nav ul {
+  display: flex;
+  justify-content: center; /* Align items to the right */
+}
+
+nav ul li {
+  margin: 20px 20px; /* Increase margin for better spacing */
 }
 
 main {

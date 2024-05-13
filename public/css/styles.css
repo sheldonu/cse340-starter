@@ -209,6 +209,15 @@ nav ul li a:hover {
   justify-content: center;
 }
 
+#detail-display {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+
 @media only screen and (min-width: 768px) {
 body {
   background-image: linear-gradient(45deg, #000 25%, transparent 25%),
@@ -384,8 +393,51 @@ main {
 }
 
 #inv-display {
-  grid-column: 2 / 3;
+  grid-column: 1 / 3;
+  flex-direction: row;
+}
+
+
+.namePrice {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.namePrice h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.namePrice p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.namePrice span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.notice {
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+#detail-display {
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+.left-image {
+  grid-column: 1 / 2;
+}
+
+main h1 {
   grid-row: 1 / 3;
+  grid-column: 1 / 3;
 }
 
 }

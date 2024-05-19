@@ -305,6 +305,10 @@ form * {
   font-size: small;
 }
 
+.vmlinks {
+  display: flex;
+  flex-direction: column;
+}
 
 @media only screen and (min-width: 768px) {
 body {

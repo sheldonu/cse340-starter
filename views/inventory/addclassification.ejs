@@ -1,0 +1,18 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<% messages() %>
+
+
+<div class="login-container">
+<form action="/inventory/addclassification" method="post">
+    <label for="text">Classification Name</label>
+    <span class="passpg">NAME MUST BE ALPHABETIC CHARACTERS ONLY.</span>
+    <input type="text" name="classification_name" required value="<%= locals.classification_name %>">
+    <br>
+    <input type="submit" value="Add Classification" class="login-button">
+</form>
+</div>

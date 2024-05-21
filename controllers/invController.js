@@ -46,6 +46,7 @@ invCont.buildByManagementId = async function (req, res, next) {
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
+    errors: null,
   })
 }
 
@@ -54,9 +55,11 @@ invCont.buildByManagementId = async function (req, res, next) {
  * ************************** */
 invCont.buildByAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message.")
   res.render("./inventory/addclassification", {
     title: "Add New Classification",
     nav,
+    errors: null,
   })
 }
 

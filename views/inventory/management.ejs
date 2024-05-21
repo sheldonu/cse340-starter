@@ -4,7 +4,15 @@
       res.redirect('/')
     } %>
 
-<% messages() %>
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <div class="vmlinks">
     <a href="/inv/addclassification">Add New Classification</a>

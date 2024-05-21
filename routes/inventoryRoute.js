@@ -18,9 +18,7 @@ router.get("/addclassification", utilities.handleErrors(invController.buildByAdd
 router.post(
     "/addclassification", regValidate.classificationRules(),
     regValidate.checkClassificationData,
-    (req, res) => {
-        res.status(200).send('classification check progress')
-    }
-)
+    utilities.handleErrors(invController.addClassification)
+);
 
 module.exports = router;

@@ -4,17 +4,14 @@ const validate = {}
 const invModel = require("../models/inventory-model")
 
 validate.classificationRules = () => {
-    return [
-        body("classification_name")
-            .matches(/^[A-Za-z0-9_]+$/)
-            .custom(async (classification_name) => {
-                const classificationExists = await invModel.checkExistingClassification(classification_name)
-                if (classificationExists){
-                  throw new Error("Email exists. Please log in or use different email")
-                }
-              })
-            .withMessage('Classification name must contain only alphanumeric characters and underscores.'),
-    ]
+  return [
+    // name is required and must be string
+    body("classification_name")
+      .trim()
+      .isLength({ min: 1 })
+      .isAlpha()
+      .withMessage("Provide a correct classification name."),
+  ]
 }
 
 validate.checkClassificationData = async (req, res, next) => {

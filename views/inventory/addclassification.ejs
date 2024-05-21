@@ -15,9 +15,9 @@
 <% } %>
 
 <div class="login-container">
-<form action="/inventory/addclassification" method="post">
+<form action="/inv/addclassification" method="post">
     <label for="text">Classification Name</label>
-    <span class="passpg">NAME MUST BE ALPHABETIC CHARACTERS ONLY.</span>
+    <span class="passpg">NAME CANNOT HAVE SPACES OR SPECIAL CHARACTHERS</span>
     <input type="text" name="classification_name" required value="<%= locals.classification_name %>">
     <br>
     <input type="submit" value="Add Classification" class="login-button">

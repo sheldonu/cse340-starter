@@ -86,4 +86,15 @@ invCont.addClassification = async function (req, res, next) {
   }
 }
 
+invCont.buildByAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let list = await utilities.buildClassificationList()
+  req.flash("notice", "This is a flash message.")
+  res.render("./inventory/addinventory", {
+    title: "Add New Vehicle",
+    nav,
+    errors: null,
+  })
+}
+
 module.exports = invCont

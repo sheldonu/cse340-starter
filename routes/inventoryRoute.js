@@ -15,6 +15,8 @@ router.get("/", utilities.handleErrors(invController.buildByManagementId));
 
 router.get("/addclassification", utilities.handleErrors(invController.buildByAddClassification));
 
+router.get("/addinventory", utilities.handleErrors(invController.buildByAddInventory));
+
 router.post(
     "/addclassification", regValidate.classificationRules(),
     regValidate.checkClassificationData,

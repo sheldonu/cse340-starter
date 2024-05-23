@@ -93,7 +93,7 @@ invCont.buildByAddInventory = async function (req, res, next) {
   res.render("./inventory/addinventory", {
     title: "Add New Vehicle",
     nav,
-    list: list,
+    list,
     errors: null,
   })
 }
@@ -123,6 +123,7 @@ invCont.addInventory = async function (req, res, next) {
       })
     } else {
       req.flash("notice", "Sorry, the insert failed.")
+      let list = await utilities.buildClassificationList()
       res.status(501).render("inventory/addinventory", {
         title: "Add New Vehicle",
         nav,

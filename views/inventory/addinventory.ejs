@@ -6,9 +6,20 @@
 
 <% messages() %>
 
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 
 <div class="login-container">
 <form action="/inv/addinventory" method="post">
+    <label for="classification_id">Classification</label>
+    <%- list %>
+    <br>
+
     <label for="inv_make">Make:</label>
     <input type="text" id="inv_make" name="inv_make" required><br><br>
 
@@ -36,6 +47,6 @@
     <label for="inv_color">Color:</label>
     <input type="text" id="inv_color" name="inv_color" required><br><br>
 
-    <input type="submit" value="Add Vehicle" class="login-button">
+    <input type="submit" value="Add New Vehicle" class="login-button">
 </form>
 </div>

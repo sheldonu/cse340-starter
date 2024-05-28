@@ -48,5 +48,8 @@
     <input type="text" id="inv_color" name="inv_color" value="<%- inv_color %>" required><br><br>
 
     <input type="submit" value="Update Vehicle" class="login-button">
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
 </form>
 </div>

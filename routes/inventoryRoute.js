@@ -33,4 +33,9 @@ router.post(
     utilities.handleErrors(invController.addInventory)
 )
 
+router.post("/update/", regValidate.inventoryRules(),
+    regValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory))
+
+
 module.exports = router;

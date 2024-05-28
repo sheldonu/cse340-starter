@@ -197,4 +197,99 @@ invCont.editInventoryView = async function (req, res, next) {
 
 }
 
+invCont.addInventory = async function (req, res, next) {
+    let nav = await utilities.getNav()
+    const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
+    const insertResult = await invModel.addInventory(
+      classification_id, 
+      inv_make, 
+      inv_model, 
+      inv_year, 
+      inv_description, 
+      inv_image, inv_thumbnail, 
+      inv_price, 
+      inv_miles, 
+      inv_color
+    )
+
+    if (insertResult) {
+      nav = await utilities.getNav()
+      req.flash("notice", `The Inventory was successfully added.`)
+      res.status(201).render("inventory/management", {
+        title: "Vehicle Management",
+        nav,
+        errors: null,
+      })
+    } else {
+      req.flash("notice", "Sorry, the insert failed.")
+      let list = await utilities.buildClassificationList()
+      res.status(501).render("inventory/addinventory", {
+        title: "Add New Vehicle",
+        nav,
+        list,
+        errors: null,
+      })
+    }
+}
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  const updateResult = await invModel.updateInventory(
+    inv_id,  
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
+
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    req.flash("notice", `The ${itemName} was successfully updated.`)
+    res.redirect("/inv/")
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("inventory/editinventory", {
+    title: "Edit " + itemName,
+    nav,
+    classificationSelect: classificationSelect,
+    errors: null,
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+    })
+  }
+}
+
 module.exports = invCont

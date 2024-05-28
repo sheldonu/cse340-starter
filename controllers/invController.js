@@ -153,7 +153,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
  * ************************** */
 invCont.editInventoryView = async function (req, res, next) {
 
-  const inv_id = parseInt(req.params.inv_id)
+  const inv_id = parseInt(req.params.inventory_id)
 
   let nav = await utilities.getNav()
 
@@ -192,8 +192,6 @@ invCont.editInventoryView = async function (req, res, next) {
     inv_miles: itemData[0].inv_miles,
 
     inv_color: itemData[0].inv_color,
-
-    classification_id: itemData[0].classification_id
 
   })
 

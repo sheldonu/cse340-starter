@@ -19,6 +19,8 @@ router.get("/addinventory", utilities.handleErrors(invController.buildByAddInven
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
+router.get("/edit/:inventory_id", utilities.handleErrors(invController.editInventoryView))
+
 router.post(
     "/addclassification", regValidate.classificationRules(),
     regValidate.checkClassificationData,

@@ -336,13 +336,12 @@ invCont.buildByDelete = async function (req, res, next) {
  * ************************** */
 invCont.deleteInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
-  const inv_id = parseInt(req.body.inventory_id)
+  const inv_id = parseInt(req.body.inv_id)
   const deleteResult = await invModel.deleteInventory(inv_id)
 
 
   if (deleteResult) {
-    const itemName = deleteResult.inv_make + " " + deleteResult.inv_model
-    req.flash("notice", `The ${itemName} was successfully deleted.`)
+    req.flash("notice", `The deletion was successful.`)
     res.redirect("/inv/")
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)

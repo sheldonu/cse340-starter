@@ -17,6 +17,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const errorRoute = require('./routes/errorRoute');
 
 
 /* ***********************
@@ -52,6 +53,9 @@ app.use(function(req, res, next){
 app.use(cookieParser())
 
 app.use(utilities.checkJWTToken)
+
+app.use("/error", errorRoute);
+
 
 
 /* ***********************

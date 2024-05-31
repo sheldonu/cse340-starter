@@ -144,6 +144,31 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+ Util.checkUserRole = (req, res, next) => {
+  const token = req.cookies.jwt;
+
+  if (!token) {
+    req.flash("notice", "You need to log in to access this page.");
+    return res.redirect('/account/login');
+  }
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
+    if (err) {
+      req.flash("notice", "Please log in to access this page.");
+      return res.redirect('/account/login');
+    }
+
+    if (decodedToken.account_type === 'Employee' || decodedToken.account_type === 'Admin') {
+      res.locals.accountData = decodedToken;
+      res.locals.loggedin = true;
+      next();
+    } else {
+      req.flash("notice", "You do not have permission to access this page.");
+      return res.redirect('/account/login');
+    }
+  });
+};
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

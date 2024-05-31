@@ -8,6 +8,13 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have successfully logged out.")
+  res.redirect("/account/login")
+})
+
+
 router.post("/register", regValidate.registationRules(),
 regValidate.checkRegData,
 utilities.handleErrors(accountController.registerAccount))

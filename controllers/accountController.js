@@ -120,4 +120,30 @@ async function buildManagement(req, res) {
   })
 }
   
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement }
+async function updateAccountView(req, res, next) {
+  const account_id = parseInt(req.params.accountId);
+  const accountData = await accountModel.getAccountById(account_id);
+  let nav = await utilities.getNav();
+
+  res.render("account/update", {
+      title: "Update Account Information",
+      nav,
+      accountData,
+      errors: null,
+  });
+};
+
+async function updateAccount(req, res, next) {
+  const { account_id, account_firstname, account_lastname, account_email } = req.body;
+  const updateResult = await accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email);
+
+  if (updateResult) {
+      req.flash("notice", "Account information updated successfully.");
+      res.redirect("/account/manage");
+  } else {
+      req.flash("notice", "Failed to update account information.");
+      res.status(501).redirect(`/account/update/${account_id}`);
+  }
+};
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, updateAccountView, updateAccount }

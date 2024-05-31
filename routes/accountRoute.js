@@ -8,6 +8,11 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
+router.get("/update/:accountId", utilities.checkUserRole, utilities.handleErrors(accountController.updateAccountView));
+
+router.post("/update", utilities.checkUserRole, utilities.handleErrors(accountController.updateAccount));
+
+
 router.get("/logout", (req, res) => {
   res.clearCookie("jwt")
   req.flash("notice", "You have successfully logged out.")

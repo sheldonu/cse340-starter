@@ -1,0 +1,22 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<% messages() %>
+
+<form action="/account/update" method="post">
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+    
+    <label for="firstname">First Name:</label>
+    <input type="text" name="account_firstname" id="firstname" value="<%= accountData.account_firstname %>">
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" name="account_lastname" id="lastname" value="<%= accountData.account_lastname %>">
+
+    <label for="email">Email:</label>
+    <input type="email" name="account_email" id="email" value="<%= accountData.account_email %>">
+
+    <button type="submit">Update Account Information</button>
+</form>

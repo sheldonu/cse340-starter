@@ -65,4 +65,18 @@ async function getAccountById(account_id) {
   }
 };
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById }
+async function updatePassword(account_id, account_password) {
+  try {
+    const sql = `
+      UPDATE account
+      SET account_password = $1
+      WHERE account_id = $2
+    `;
+    const result = await pool.query(sql, [account_password, account_id]);
+    return result.rowCount > 0; // returns true if update was successful
+  } catch (error) {
+    return error.message;
+  }
+};
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword }

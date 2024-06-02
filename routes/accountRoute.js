@@ -10,7 +10,9 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
 router.get("/update/:accountId", utilities.checkUserRole, utilities.handleErrors(accountController.updateAccountView));
 
-router.post("/update", utilities.checkUserRole, utilities.handleErrors(accountController.updateAccount));
+router.post("/update", regValidate.accountUpdateRules(), regValidate.checkAccountUpdateData, utilities.handleErrors(accountController.updateAccount));
+
+router.post('/update-password', regValidate.passwordUpdateRules(), regValidate.checkPasswordUpdateData, utilities.handleErrors(accountController.updatePassword));
 
 
 router.get("/logout", (req, res) => {

@@ -1,0 +1,26 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<% messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<form action="/account/feedback" method="post">
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+    <div>
+        <label for="feedback_text">Feedback</label>
+        <textarea id="feedback_text" name="feedback_text" required></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Submit Feedback">
+    </div>
+</form>

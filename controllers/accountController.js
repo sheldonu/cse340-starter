@@ -172,4 +172,58 @@ async function updatePassword(req, res, next) {
   }
 };
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, updateAccountView, updateAccount, updatePassword }
+async function renderFeedbackForm(req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("account/feedback", {
+      title: "Leave Feedback",
+      nav,
+      errors: null,
+  });
+};
+
+/* *****************************
+*  Add Feedback
+* *************************** */
+async function addFeedback(req, res) {
+  const { account_id, feedback_text } = req.body;
+
+  if (!feedback_text) {
+      const nav = await utilities.getNav();
+      res.render("account/feedback", {
+          title: "Leave Feedback",
+          nav,
+          errorMessage: "Feedback text is required",
+      });
+      return;
+  }
+
+  const feedback = await accountModel.addFeedback(account_id, feedback_text);
+  if (feedback.feedback_id) {
+      res.redirect("/account/");
+  } else {
+      const nav = await utilities.getNav();
+      res.render("account/feedback", {
+          title: "Leave Feedback",
+          nav,
+          errorMessage: "Error adding feedback",
+      });
+  }
+};
+
+/* *****************************
+*  View Feedback
+* *************************** */
+async function viewFeedback(req, res) {
+  const account_id = req.params.account_id;
+  const feedback = await accountModel.getFeedbackByAccountId(account_id);
+  const nav = await utilities.getNav();
+
+  res.render("account/viewFeedback", {
+      title: "View Feedback",
+      nav,
+      feedback,
+  });
+};
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, updateAccountView, 
+  updateAccount, updatePassword, renderFeedbackForm, addFeedback, viewFeedback }

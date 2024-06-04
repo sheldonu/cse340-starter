@@ -44,6 +44,16 @@ CREATE TABLE IF NOT EXISTS public.account
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 
+CREATE TABLE IF NOT EXISTS public.feedback 
+(
+    feedback_id SERIAL PRIMARY KEY,
+    account_id INT NOT NULL,
+    feedback_text TEXT NOT NULL,
+    feedback_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
+
+
 -- Data for table 'classification'
 INSERT INTO public.classification (classification_name)
 VALUES ('Custom'),

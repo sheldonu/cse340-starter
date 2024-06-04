@@ -79,4 +79,34 @@ async function updatePassword(account_id, account_password) {
   }
 };
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword }
+/* *****************************
+*   Add new feedback
+* *************************** */
+async function addFeedback(account_id, feedback_text) {
+    try {
+        const sql = "INSERT INTO feedback (account_id, feedback_text) VALUES ($1, $2) RETURNING *";
+        const result = await pool.query(sql, [account_id, feedback_text]);
+        return result.rows[0];
+    } catch (error) {
+        return error.message;
+    }
+}
+
+/* *****************************
+*   Get feedback for an account
+* *************************** */
+async function getFeedbackByAccountId(account_id) {
+    try {
+        const sql = "SELECT * FROM feedback WHERE account_id = $1 ORDER BY feedback_date DESC";
+        const result = await pool.query(sql, [account_id]);
+        return result.rows;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+module.exports = { addFeedback, getFeedbackByAccountId };
+
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword,
+  addFeedback, getFeedbackByAccountId }

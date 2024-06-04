@@ -1,0 +1,16 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } %>
+
+<% if (feedback.length > 0) { %>
+    <ul>
+        <% feedback.forEach(item => { %>
+            <li>
+                <p><%= item.feedback_text %></p>
+                <small><%= new Date(item.feedback_date).toLocaleString() %></small>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>No feedback available.</p>
+<% } %>

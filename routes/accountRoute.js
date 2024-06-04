@@ -14,6 +14,11 @@ router.post("/update", regValidate.accountUpdateRules(), regValidate.checkAccoun
 
 router.post('/update-password', regValidate.passwordUpdateRules(), regValidate.checkPasswordUpdateData, utilities.handleErrors(accountController.updatePassword));
 
+router.get("/feedback", utilities.handleErrors(accountController.renderFeedbackForm));
+
+router.post("/feedback", utilities.handleErrors(accountController.addFeedback));
+
+router.get("/view-feedback/:account_id", utilities.handleErrors(accountController.viewFeedback));
 
 router.get("/logout", (req, res) => {
   res.clearCookie("jwt")
